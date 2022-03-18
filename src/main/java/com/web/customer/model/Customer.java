@@ -23,6 +23,10 @@ public class Customer {
 	@Column(name="email")
 	private String email;
 	
+	@Column(name="contact_no")
+	private Long contactNo;
+	
+	private String address;
 	
 	public Long getId() {
 		return id;
@@ -48,5 +52,16 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public Long getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(Long contactNo) {
+		this.contactNo = contactNo;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }
