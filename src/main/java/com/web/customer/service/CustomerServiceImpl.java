@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.customer.exception.CustomerNotFoundException;
 import com.web.customer.model.Customer;
 import com.web.customer.repository.CustomerRepository;
 
@@ -22,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void saveCustomer(Customer customer) {
-		this.customerRepository.save(customer);		
+		customerRepository.save(customer);		
 	}
 
 	@Override
@@ -32,13 +33,13 @@ public class CustomerServiceImpl implements CustomerService {
 		if(optional.isPresent()) {
 			customer = optional.get();
 		} else {
-			throw new RuntimeException("Customer not found for id:" + id);
+			throw new CustomerNotFoundException("Customer not found for id:" + id);
 		}
 		return customer;
 	}
 
 	@Override
 	public void deleteCustomerById(long id) {
-		this.customerRepository.deleteById(id);	
+		customerRepository.deleteById(id);	
 	}
 }

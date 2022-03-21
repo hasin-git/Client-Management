@@ -28,6 +28,20 @@ public class Customer {
 	
 	private String address;
 	
+	public Customer() {
+		
+	}
+	
+	public Customer(Long id, String firstName, String lastName, String email, Long contactNo, String address) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.contactNo = contactNo;
+		this.address = address;
+	}
+	
 	public Long getId() {
 		return id;
 	}
