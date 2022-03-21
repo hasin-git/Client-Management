@@ -52,12 +52,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.jacoco</groupId>
+		    <artifactId>jacoco-maven-plugin</artifactId>
+		    <version>0.8.7</version>
+		</dependency>
 		 <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.12</version>
-        <scope>test</scope>
-    </dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.12</version>
+		    <scope>test</scope>
+	        </dependency>
 	</dependencies>
 
 	<build>
@@ -66,6 +71,55 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+		    <groupId>org.jacoco</groupId>
+		    <artifactId>jacoco-maven-plugin</artifactId>
+		    <configuration>
+		    	<skip>false</skip>
+		    	<check />
+		    	<rules>
+		    		<rule>
+		    			<element>CLASS</element>
+		    			<excludes>
+		    				<exclude>*Test</exclude>
+		    			</excludes>
+		    		</rule>
+		    	</rules>
+		    </configuration>
+		    <executions>
+		    	<execution>
+		    		<id>prepare-agent</id>
+		    		<goals>
+		    			<goal>prepare-agent</goal>
+		    		</goals>		    		
+		    	</execution>
+		    	<execution>
+		    		<id>report</id>
+		    		<phase>prepare-package</phase>
+		    		<goals>
+		    			<goal>report</goal>
+		    		</goals>
+		    		<configuration>
+		    			<outputDirectory>${project.build.directory}/jacoco</outputDirectory>
+		    		</configuration>
+		    	</execution>
+		    	<execution>
+		    		<id>check</id>
+		    		<goals>
+		    			<goal>check</goal>
+		    		</goals>
+		    		<configuration>
+		    			<check>
+		    				<instructionRatio>100</instructionRatio>
+		    				<branchRatio>95</branchRatio>
+		    				<lineRatio>99</lineRatio>
+		    				<methodRatio>90</methodRatio>
+		    				<classRatio>90</classRatio>
+		    			</check>
+		    		</configuration>
+		    	</execution>
+		    </executions>
+		</plugin>
 		</plugins>
 	</build>
 
