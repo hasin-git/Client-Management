@@ -1,4 +1,4 @@
-package com.web.customer;
+package com.web.customer.controller;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,11 +26,12 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CustomerContollerTest {
+public class CustomerControllerTest {
 
 	private MockMvc mockMvc;
 	 
@@ -49,7 +50,13 @@ public class CustomerContollerTest {
     }
     
     private Customer getCustomer() {
-    	Customer customer = new Customer(102L, "Princy", "Jose", "princy_ad@gmail.com", 9889970021L, "74,Forest Gate, Glassgow");
+    	Customer customer = new Customer();
+    	customer.setId(102L);
+    	customer.setFirstName("Princy");
+    	customer.setLastName("Jose");
+    	customer.setEmail("princy_33@gmail.com");
+    	customer.setContactNo(9889970021L);
+    	customer.setAddress("74,Forest Gate, Glassgow");
 		return customer;    	
     }
     
@@ -63,8 +70,8 @@ public class CustomerContollerTest {
 		when(customerService.getAllCustomers()).thenReturn(clist);
              
         mockMvc.perform(get("/"))
-                .andExpect(MockMvcResultMatchers.view().name("index"));            
-      
+                .andExpect(MockMvcResultMatchers.view().name("index"));  
+            
         verify(customerService, times(1)).getAllCustomers();        
     }
     
